@@ -1,8 +1,9 @@
 import Head from 'next/head'
 import React from 'react'
 import MainNavbar from '../navbar/MainNavbar'
-
 import TopNavbar from '../navbar/TopNavbar'
+import Footer from '../footer/Footer'
+
 export default function Layout({children,title,desc}) {
 
 
@@ -16,13 +17,14 @@ export default function Layout({children,title,desc}) {
         <main>
             <TopNavbar/>
             <MainNavbar/>
-           <div>
+           <div className=''>
             {children}
            </div>
-           
         </main>
-        <footer>     
- 
+        <footer>
+          <div>
+            <Footer/>
+          </div>     
         </footer>
     </div>
   )

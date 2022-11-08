@@ -1,12 +1,10 @@
-import Layout from '../components/utils/Layout';
+import Layout from '../components/layout/Layout';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import {useTranslation} from "next-i18next";
 import React, { useContext, useEffect, useState } from 'react';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import { API_URL } from '../utils/url';
 import { Store } from '../utils/Store';
-import { createCustomer, getCustomer, getPages, login } from '../lib/shopify';
 import Cookies from 'js-cookie';
 import SmallLoader from '../components/loading/SmallLoader';
 
@@ -28,47 +26,10 @@ export default function Login({pages}) {
 
  // handle loin
   const handleSubmit=async(e)=>{
-      e.preventDefault();
-      setLoading(true)
-      const user={
-        identifier:email,
-        password
-     }
-     const url=`${API_URL}/login`
-     const options={
 
-              endpoint: url,
-              method: "POST",
-              headers: {
-                "Accept": "application/json",
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({ user })
-   }
-         const res = await fetch(url, options)
-         const token=await res.json();
-
-         if(token.customerAccessTokenCreate.customerAccessToken){
-            try{
-               const user =await getCustomer(token.customerAccessToken.accessToken);
-               setErrMsg("")
-               dispatch({type:"TOKEN",payload:token.customerAccessToken.accessToken})
-               dispatch({type:"USER_LOGIN",payload:user})
-               setLoading(false)
-            }catch(err){
-               setErrMsg(err)
-            }
-            
-         }else if(token.customerAccessTokenCreate.customerUserErrors.length>0){
-            setErrMsg(token.customerAccessTokenCreate.customerUserErrors[0].message)
-            setLoading(false)
-         }
-
-    
-         setLoading(false)
   }
   return (
-   <Layout title="login" pages={pages}>
+   <Layout title="login">
       <div className='container mx-auto flex justify-center my-8 px-4 '  style={{direction:i18n.language==="ar"?"rtl":"ltr"}}>
          <div className=" bg-white text-gray-900 bottom-0 right-0 w-full md:w-1/2 border border-primary px-4 md:px-8">
                <div className="text-gray-900 text-2xl md:text-3xl w-full text-center my-6 font-semibold capitalize">{t("common:login_here")}</div>
@@ -86,18 +47,15 @@ export default function Login({pages}) {
 }
 export async function getStaticProps({locale}) {
    try{
-      const pages=await getPages(locale)
       return {
          props: {
-            pages:JSON.parse(pages)||[],
-            errMsg:false,
+
            ...(await serverSideTranslations(locale, ['common',"product"]))
          }
        }
    }catch(e){
       return {
          props: {
-           errMsg:true,
            ...(await serverSideTranslations(locale, ['common',"product"]))
          }
        }

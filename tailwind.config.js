@@ -8,7 +8,19 @@ module.exports = {
     extend: {
       colors:{
         main:"#002b28",
-        secondary:"#ff001c",
+        secondary:{
+          100:"#ff001c",
+          200:"#b30b0b"
+        },
+        starColor:"#f8d448",
+        dark:{
+          100:"#303633",
+          200:"#1f2421"
+        },
+        customGray:{
+          100:"#ecefed",
+          200:"#6a716e"
+        },
         error:"#D92D18"
       }
     
