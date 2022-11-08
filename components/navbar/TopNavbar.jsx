@@ -29,7 +29,7 @@ function TopNavbar() {
             <div className='capitalize mx-1'>{countary}</div>
            </div>
            <div onClick={()=>setOptionLayout(true)} className={`flex items-center mx-4 rounded-full cursor-pointer px-2 py-1 transition duration-200 ${darkMode?"hover:bg-dark-100":"hover:bg-customGray-200"}`}>
-             <GrLanguage className='text-xl'/>
+             <GrLanguage className={`text-xl ${darkMode?"text-white":"text-main"}`}/>
             <div className='capitalize mx-1'>{i18n.language==="ar"?"Arabic":"english"}</div>
            </div>
            <div className={`flex items-center  rounded-full cursor-pointer px-2 py-1 transition duration-200 ${darkMode?"hover:bg-dark-100":"hover:bg-customGray-200"}`}>

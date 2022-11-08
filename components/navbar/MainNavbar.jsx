@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { useContext, useEffect, useState } from "react";
 import {motion} from "framer-motion"
-import {  MdOutlineDehaze, MdOutlinePersonOutline, 
+import {  MdOutlineClear, MdOutlineDehaze, MdOutlinePersonOutline, 
 MdOutlineSearch, MdOutlineShoppingBasket,
 MdOutlineShoppingCart
 } from "react-icons/md";
@@ -16,6 +16,7 @@ import dynamic from "next/dynamic";
 import MenuCart from "../menus/MenuCart";
 import { cards } from "../../utils/dumycards";
 import FeaturesMenu from "../menus/FeaturesMenu";
+import SearchInput from "../search/SearchInput";
 
 
 const HeadBar=({pages})=>{
@@ -28,7 +29,7 @@ const HeadBar=({pages})=>{
     const [menuCart,setMenuCart]=useState(false);
     const {t,i18n} =useTranslation();
     const [searchProducts,setSearchProducts]=useState(null);
-    const [search,setSearch]=useState("");
+    const [searchMenu,setSearchMenu]=useState(false);
     
    const cardFeaturesLinks=["All gift cards","Popular","Recently Added","Rewards"]
    const cardPopularLinks=["Uber","Etisalat","Vodafone","PUBG Mobile UC","Orange","Noon.com"]
@@ -40,11 +41,7 @@ const HeadBar=({pages})=>{
     {name:"Vodafone Refill",img:"https://www.bitrefill.com/content/cn/b_rgb%3Affffff%2Cc_pad%2Ch_151%2Cw_250/v1556099168/vodafone.jpg"}
   ]
 
-    const closeMenus=()=>{
-
-      setMenItems(false)
-      setMenuCart(false)
-    }
+console.log(searchMenu)
     const handleMenus=(type)=>{
       switch (type) {
        
@@ -77,14 +74,11 @@ const handleChandeLang=(e)=>{
    
    }
 
-   const handleSearchSubmit=(e)=>{
-       e.preventDefault()
-       router.push(`/search/${search}`)
-   }
+ 
 
 
     return(
-      <div className={`${darkMode?"bg-dark-200 text-white":"bg-wite text-main"} relative`}>
+      <div className={`${darkMode?"bg-dark-200 text-white":"bg-wite text-main"} border-b relative`}>
            <div className="container  mx-auto ">
             <div className={` bg-inherit text-inherit w-full flex items-center justify-between py-2 px-2 md:px-0 shadow-sm md:shadow-none `}> 
                   <div className="flex items-center " >
@@ -94,74 +88,56 @@ const handleChandeLang=(e)=>{
                       <div className="text-3xl lg:text-4xl font-extrabold">Bitrefill</div>
                       </a>
                     </Link> 
-                    
-                        <form onSubmit={handleSearchSubmit} className=" hidden md:flex mx-6 text-gray-900 items-center">
-                          <div className="flex items-center md:w-64 lg:w-96 relative rounded-full">
-                            <input onChange={(e)=>setSearch(e.target.value)} type="text" className={`${darkMode?"focus:border-secondary-100 bg-dark-100":"focus:border-main focus:bg-white bg-customGray-100"} border flex-grow transition duration-200  px-6 py-2 w-full h-full rounded-full`} placeholder={t("common:search")}/>
-                            <div className="absolute top-1/6 right-0">
-                              <MdOutlineSearch  className="text-3xl text-customGray-200 cursor-pointer text-primary"/>
-                            </div>
-                            </div>
-                            </form> 
+                         <div className="hidden md:block md:w-64 lg:w-96">
+                            <SearchInput/>
+                         </div>
                             </div>
                         <div className="w-1/2 md:w-1/3 flex  items-center">
                         
                             <div className=" w-full items-center flex justify-end">
-                            {true?(
+                            
                               <div className=" hidden  lg:flex w-full justify-end items-center mx-1">
                                 <Link href="/login">
                                   <a className={`${darkMode?"bg-dark-100 text-white hover:bg-customGray-200":"bg-customGray-100 text-main hover:bg-customGray-200"} transition duration-200  p-1 rounded-full mx-2 px-4 py-2  capitalize text-ld font-semibold`}>
                                     login
                                   </a>
                                 </Link>
-                                <Link href="/login">
+                                <Link href="/register">
                                   <a className="transition duration-200 hover:bg-secondary-200 p-1 rounded-full mx-2 px-4 py-2 bg-secondary-100 text-white capitalize  lg:text-lg font-semibold">
                                     create account
                                   </a>
                                 </Link>
                               </div>
-                            ):(
-                            <div className="relative md:w-full hidden md:flex justify-end">
-                            <div className="relative">
-                                <div onClick={()=>setMenuUser(!menuUser)} className="border capitalize border-primary text-gray-900 text-sm py-0.5 px-1 md:text-base md:px-2 md:py-1 cursor-pointer">{user.firstName+" "+user.lastName}</div>
-                                {
-                                <motion.div initial={{display:"none"}} animate={menuUser?{display:"block"}:{display:"none"}}  className="absolute top-8 left-0 z-30 border border-primary bg-white py-4 px-2">
-                                  <button className="py-2 text-center px-4 capitalize hover:bg-secondary-100 hover:text-white">{user.firstName+" "+user.lastName}</button>
-                                  <button className="py-2 text-center px-4 hover:bg-secondary-100 hover:text-white">Profile</button>
-                                  <button onClick={handleLogout} className="py-2 text-center px-4 hover:bg-secondary-100 hover:text-white">Logout</button>
-                                </motion.div>
-                                }
-                            </div>
                            
+                           <div className={`${darkMode?"hover:bg-dark-100":"hover:bg-customGray-100"} lg:hidden py-2 rounded-full`} >
+                                <MdOutlineSearch onClick={()=>setSearchMenu(true)} className="text-2xl cursor-pointer"/> 
+                                {searchMenu&&<div className={`${darkMode?"bg-dark-200 text-white":"bg-white text-main"} z-40 py-16 text-center fixed top-0 left-0 w-full h-screen`}>
+                                <div className={`absolute ${i18n.language==="ar"?"left-4":"right-4"} top-4 cursor-pointer`} onClick={()=>setSearchMenu(false)}><MdOutlineClear className="text-3xl"/></div>
+                                   <SearchInput/>
+                                </div>}
                             </div>
-                            )}
-                           <div className={`${darkMode?"hover:bg-dark-100":"hover:bg-customGray-100"} lg:hidden py-2 rounded-full`} onClick={()=>handleMenus("")}>
-                              <Link href={"/login"}>
-                                <a>
-                                <MdOutlineSearch className="text-2xl cursor-pointer"/>
-                                </a>
-                              </Link> 
-                            </div>
-                            <div className={`${darkMode?"hover:bg-dark-100":"hover:bg-customGray-100"} lg:hidden py-2 rounded-full`} onClick={()=>handleMenus("")}>
+                            <div className={`${darkMode?"hover:bg-dark-100":"hover:bg-customGray-100"} lg:hidden py-2 rounded-full`} >
                               <Link href={"/login"}>
                                 <a>
                                 <MdOutlinePersonOutline className="text-2xl cursor-pointer"/>
                                 </a>
                               </Link> 
                             </div>
-                            <div className={`${darkMode?"hover:bg-dark-100":"hover:bg-customGray-100"} py-2 rounded-full flex justify-end relative px-2 md:px-4`} onClick={()=>handleMenus("cart")}>
+                            <div className={`${darkMode?"hover:bg-dark-100":"hover:bg-customGray-100"} py-2 rounded-full flex justify-end relative px-2 md:px-4`} >
+                              <Link href={"/checkout"}><a>
                                 <MdOutlineShoppingCart className="text-xl md:text-4xl cursor-pointer"/>
-                                <div className="absolute text-sm md:text-base text-white bg-secondary-100 bottom-4 md:bottom-8 right-0 px-1 md:px-1.5 rounded-full">0</div>
+                              </a></Link>
+                                <div className="absolute text-sm md:text-base text-white bg-secondary-100 bottom-4 z-10 md:bottom-8 right-0 px-1 md:px-1.5 rounded-full">0</div>
                             </div>
                             </div>
                         </div>
           </div>
           {/*freatures*/}
-             <div className="py-1  hidden md:block">
+             <div className="py-1  hidden md:block ">
               <div className="flex ">
-                <div onMouseOver={()=>setGiftCardHover(true)} onMouseOut={()=>setGiftCardHover(false)} className="transition group duration-200 hover:text-secondary-100 ">
+                <div  className="transition group duration-200 hover:text-secondary-100 ">
                  <div className={` hover:underline  mx-3 font-semibold cursor-pointer`}>Gift Cards</div>  
-                {<div className={`${darkMode?"bg-dark-200 text-white":"bg-white text-main"} transition duration-200 absolute group-hover:block hidden hover:block top-15 z-20 left-0 w-full`}>
+                {<div className={`${darkMode?"bg-dark-200 text-white":"bg-white text-main"} border-b transition duration-200 absolute group-hover:block hidden hover:block top-15 z-20 left-0 w-full`}>
                      <div className="container mx-auto flex">
                          <div className="w-1/6 p-4">
                             <div className="text-sm font-semibold">Featured</div>
@@ -214,9 +190,9 @@ const handleChandeLang=(e)=>{
                      </div>
                   </div>} 
               </div>  
-              <div onMouseEnter={()=>setGiftCardHover(true)} className="group transition duration-200 hover:text-secondary-100">
+              <div className="group transition duration-200 hover:text-secondary-100">
                  <div className={ ` hover:underline mx-3 font-semibold cursor-pointer`}>Phone Refills</div>
-                 {<div className={`${darkMode?"bg-dark-200 text-white":"bg-white text-main"} transition duration-200 absolute group-hover:block hidden hover:block top-15 z-20 left-0 w-full`}>
+                 {<div className={`${darkMode?"bg-dark-200 text-white":"bg-white text-main"} border-b transition duration-200 absolute group-hover:block hidden hover:block top-15 z-20 left-0 w-full`}>
                      <div className="container mx-auto flex">
                          <div className="w-1/6 p-4">
                             <div className="text-sm font-semibold">Featured</div>

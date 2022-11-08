@@ -17,18 +17,18 @@ function OptionsLayout({setOptionLayout}) {
         setOptionLayout(false)
       }
   return (
-    <div className={`absolute top-0 left-0 flex justify-center items-center w-full h-screen z-20  `}>
-    <div className={`bg-white w-1/3 p-8 rounded-lg shadow relative`}>
+    <div className={` fixed top-0 left-0 flex justify-center items-center w-full h-screen z-20  `}>
+    <div className={`${darkMode?"bg-dark-100 text-white":"bg-white text-main"} w-full md:w-1/2 lg:w-1/3 p-8 rounded-lg shadow relative`}>
      <h1 className='text-2xl'>Country & Language</h1>
      <div className='text-customGray-200 mt-4'>Countary</div>
-       <select name="" id="" value={countaryInput} onChange={(e)=>setCountaryInput(e.target.value)} className={`${darkMode?"focus:outline-secondary-100":"outline-main"} w-full py-2 border border-customGray-200`}>
-         <option value="US"><span>Us</span></option>
-         <option value="Egypt"><span>Egypt</span></option>
+       <select name="" id="" value={countaryInput} onChange={(e)=>setCountaryInput(e.target.value)} className={`${darkMode?"focus:outline-secondary-100":"outline-main"} text-main relative w-full py-2 border border-customGray-200`}>
+         <option value="US" className={""}>Us</option>
+         <option value="Egypt" className={""}>Egypt</option>
        </select>
        <div className='text-customGray-200 mt-4'>Language</div>
-       <select name="" id="" value={langInput} onChange={(e)=>setLangInput(e.target.value)} className={`${darkMode?"focus:outline-secondary-100":"outline-main"} w-full py-2 border border-customGray-200`}>
-         <option value="en"><span className='text-sm'>EN</span><span>English</span></option>
-         <option value="ar"><span className='text-sm'>EG</span><span>Arabic</span></option>
+       <select name="" id="" value={langInput} onChange={(e)=>setLangInput(e.target.value)} className={`${darkMode?"focus:outline-secondary-100":"outline-main"} text-main relative w-full py-2 border border-customGray-200`}>
+         <option value="en" className={""}><span>English</span></option>
+         <option value="ar" className={""}><span>Arabic</span></option>
 
        </select>
        <div className={`absolute ${i18n.language==="ar"?"left-5":"right-5"} top-5 cursor-pointer`} onClick={()=>setOptionLayout(false)}><MdOutlineClear className="text-3xl"/></div>

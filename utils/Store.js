@@ -3,7 +3,7 @@ import {createContext, useReducer} from "react"
 
 const initailState={
     darkMode:Cookies.get("darkMode")?JSON.parse(Cookies.get("darkMode")):false,
-    countary:Cookies.get("countary")?JSON.parse(Cookies.get("countary")):"",
+    countary:Cookies.get("countary")?JSON.parse(Cookies.get("countary")):"egypt",
 
 }
 export const Store= createContext();
