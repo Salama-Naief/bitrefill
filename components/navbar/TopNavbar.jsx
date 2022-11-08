@@ -24,7 +24,7 @@ function TopNavbar() {
       <div className={`container mx-auto flex justify-end py-1`}>
            <div onClick={()=>setOptionLayout(true)} className={`flex items-center rounded-full cursor-pointer px-2 py-1 transition duration-200 ${darkMode?"hover:bg-dark-100":"hover:bg-customGray-200"}`}>
             <div className='relative w-6 h-6 rounded-full overflow-hidden'>
-             <Image src="/img/eg-flag.png" width={10} heigh={10} layout="fill" objectFit='center' objectPosition="center"/>
+             <Image src="/img/eg-flag.png" width={10} heigh={10} layout="fill" objectFit='center' objectPosition="center" alt=""/>
             </div>
             <div className='capitalize mx-1'>{countary}</div>
            </div>

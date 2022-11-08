@@ -49,7 +49,7 @@ function DetailsSection() {
           <path fillRule='evenodd' clipRule="evenodd" fill='#002b28' d="M99 40c14.351 0 26 11.648 26 26s-11.649 26-26 26c-14.352 0-26-11.648-26-26s11.648-26 26-26zm-4.827 29.54l16.733-16.733 4.827 4.891-21.56 21.495-11.841-11.841 4.826-4.892 7.015 7.08z"/>
         </svg>
       </div>
-      <div className=' font-semibold py-2'>3. That's it, redeem your code!</div>
+      <div className=' font-semibold py-2'>3. That is it, redeem your code!</div>
       </div>
    
     
