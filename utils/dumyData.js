@@ -25,32 +25,32 @@ export const reviews=[
 export const landingImages=[
     {
         id:1,
-        url:"",
+        url:"https://bitcoinmagazine.com/technical/bitrefill-brings-lightning-to-coinbase-with-thorapi-kit-for-exchanges",
         img:"/img/landing_bitcoin_magazine-light.webp"
     },
     {
         id:2,
-        url:"",
+        url:"https://www.coindesk.com/markets/2019/04/05/bitrefills-thor-turbo-lets-you-get-started-with-bitcoins-lightning-faster/",
         img:"/img/landing_coindesk-light.webp"
     },
     {
         id:3,
-        url:"",
+        url:"https://cointelegraph.com/news/swedish-bitcoin-powered-mobile-refill-service-bitrefill-raises-2m-to-expand-services",
         img:"/img/landing_cointelegraph-light.webp"
     },
     {
         id:4,
-        url:"",
+        url:"https://www.forbes.com/sites/ktorpey/2019/01/23/bitcoin-lightning-network-payments-have-already-surpassed-all-altcoins-at-this-retailer/",
         img:"/img/landing_forbes-light.webp"
     },
     {
         id:5,
-        url:"",
+        url:"https://www.fxstreet.com/cryptocurrencies/news/bitcoin-powered-mobile-refill-service-bitrefill-expands-reach-outside-the-us-and-europe-201906142300",
         img:"/img/landing_FXStreet-light.svg"
     },
     {
         id:6,
-        url:"",
+        url:"https://finance.yahoo.com/news/crypto-heavyweights-including-ripple-circle-133223815.html?guccounter=1&guce_referrer=aHR0cHM6Ly93d3cuYml0cmVmaWxsLmNvbS8&guce_referrer_sig=AQAAAJUGdJMUetCwqXXApepMgX9tcGkrcM1wAsngZ7EfNAGKdZ-L-byQok_-RXN14RnrqAJFmIJM4jZiO1erB2Z5aWN4-On-wl-DvBBX0NTIXIeESJ_TSdI37KMTVnwxbRbWNC-1zYwB3p7J6Ky_7AOjh4lH8a0RW1T5xWGcQhTBEjzv",
         img:"/img/landing_yahoo_finance-light.webp"
     },
 ]

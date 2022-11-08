@@ -132,7 +132,7 @@ export default  function Footer() {
             <div className="col-span-1 text-center justify-between md:flex  my-4 md:my-0">
                 <div className=''>
                    <span className='mx-2'>theme :</span>
-                   <select name="" id="" onChange={(e)=>handeTheme(e)} className={`${darkMode?"border-customGray-200":"border-main"} py-1 outline-none border  bg-transparent px-4 rounded-full`}>
+                   <select name="" id="" value={darkMode?"dark":"light"} onChange={(e)=>handeTheme(e)} className={`${darkMode?"border-customGray-200":"border-main"} py-1 outline-none border  bg-transparent px-4 rounded-full`}>
                      <option value="light" className={`${darkMode?"bg-dark-200 text-white":"bg-customGray-200 text-main"} py-1`}>light</option>
                      <option value="dark" className={`${darkMode?"bg-dark-200 text-white":"bg-customGray-200 text-main"} py-1`}>dark</option>
                    </select>

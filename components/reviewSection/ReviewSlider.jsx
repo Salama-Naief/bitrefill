@@ -29,10 +29,9 @@ function SampleNextArrow(props) {
   }
 
   // main function
- function ProductSlider(){
+ function ReviewSlider(){
 
-const [route,setRoute]=useState(null);
-const {t}=useTranslation();
+
 
     const settings = {
       
@@ -48,7 +47,7 @@ const {t}=useTranslation();
 
     return(
         <div className="relative bg-customGray-100 rounded-lg shadow ">
-           <Slider {...settings} className="">
+           <Slider {...settings} className="rounded-lg">
             {
               reviews.map(review=>(
                 <div key={review.id} className={`bg-white rounded-lg   p-8`}>
@@ -72,4 +71,4 @@ const {t}=useTranslation();
     )
 }
 
-export default dynamic(() => Promise.resolve(ProductSlider), { ssr: false });
+export default dynamic(() => Promise.resolve(ReviewSlider), { ssr: false });

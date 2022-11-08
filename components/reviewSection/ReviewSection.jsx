@@ -33,8 +33,8 @@ function ReviewSection() {
           <div className="flex  flex-wrap px-4 justify-center md:justify-between py-10">
             {
               landingImages.map(image=>(
-                 <a key={image.id} href={image.url} className="">
-                  <div className='relative w-48 h-48 md:w-40 md:h-28 lg:w-32 lg:h-24'>
+                 <a key={image.id}  href={image.url} className=" transition duration-200 rounded hover:bg-customGray-200">
+                  <div className='relative w-48 h-32 md:w-40 md:h-20 lg:w-32 lg:h-24'>
                   <Image src={image.img} layout='fill' objectFit="contain" objectPosition="center" alt=''/>
                 </div>
               </a>

@@ -12,12 +12,11 @@ function reducer(state,action){
   switch (action.type){
 
       case "DARK_MODE":{ 
-        console.log("action",action.payload)
-         localStorage.setItem("darkMode",JSON.stringify(action.payload));
+        Cookies.set("darkMode",JSON.stringify(action.payload));
         return{...state,darkMode:action.payload}
       }
       case "ADD_COUNTARY":{ 
-        localStorage.setItem("countary",JSON.stringify(action.payload));
+        Cookies.set("countary",JSON.stringify(action.payload));
        return{...state,countary:action.payload}
      }
 

@@ -2,18 +2,14 @@ import Link from "next/link";
 import { useContext, useEffect, useState } from "react";
 import {motion} from "framer-motion"
 import {  MdOutlineClear, MdOutlineDehaze, MdOutlinePersonOutline, 
-MdOutlineSearch, MdOutlineShoppingBasket,
+MdOutlineSearch,
 MdOutlineShoppingCart
 } from "react-icons/md";
-import {HiOutlineShoppingCart} from "react-icons/hi";
-import {BsHeart} from "react-icons/bs";
-import { API_URL } from "../../utils/url";
 import { Store } from "../../utils/Store";
 import {useTranslation} from "next-i18next"
 import { useRouter } from "next/router";
 import Image from "next/image";
 import dynamic from "next/dynamic";
-import MenuCart from "../menus/MenuCart";
 import { cards } from "../../utils/dumycards";
 import FeaturesMenu from "../menus/FeaturesMenu";
 import SearchInput from "../search/SearchInput";
@@ -98,12 +94,12 @@ const handleChandeLang=(e)=>{
                             
                               <div className=" hidden  lg:flex w-full justify-end items-center mx-1">
                                 <Link href="/login">
-                                  <a className={`${darkMode?"bg-dark-100 text-white hover:bg-customGray-200":"bg-customGray-100 text-main hover:bg-customGray-200"} transition duration-200  p-1 rounded-full mx-2 px-4 py-2  capitalize text-ld font-semibold`}>
+                                  <a className={`${darkMode?"bg-dark-100 text-white hover:bg-customGray-200":"bg-customGray-100 text-main hover:bg-customGray-200"} transition duration-200 rounded-full mx-2 px-4 py-1.5  capitalize text-ld font-semibold`}>
                                     login
                                   </a>
                                 </Link>
                                 <Link href="/register">
-                                  <a className="transition duration-200 hover:bg-secondary-200 p-1 rounded-full mx-2 px-4 py-2 bg-secondary-100 text-white capitalize  lg:text-lg font-semibold">
+                                  <a className="transition duration-200 hover:bg-secondary-200  rounded-full mx-2 px-4 py-1.5 bg-secondary-100 text-white capitalize  lg:text-lg font-semibold">
                                     create account
                                   </a>
                                 </Link>
@@ -271,7 +267,6 @@ const handleChandeLang=(e)=>{
             </div>               
         </div>
               {/*menu cart of product*/}
-              {menuCart&&<MenuCart setMenuCart={setMenuCart}/>}
           {featuredMenu&&<FeaturesMenu setFeaturedMenu={setFeaturedMenu}/>}
         </div>
     )
