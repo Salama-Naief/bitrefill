@@ -9,4 +9,21 @@ function Collection() {
   )
 }
 
+export async function getServerSideProps({locale}) {
+  
+  try{
+   
+        return {
+          props: {
+            ...(await serverSideTranslations(locale, ['common']))
+          }
+        }
+  }catch(err){
+    return {
+      props: {
+        ...(await serverSideTranslations(locale, ['common']))
+      }
+  }  }
+ 
+}
 export default Collection

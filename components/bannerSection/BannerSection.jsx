@@ -22,7 +22,7 @@ function BannerSection() {
                     <div className="font-bold md:text-2xl my-4 font-serf text-wrap md:w-2/3 text-center">Buy gift cards for anything under the sun.No account necessary.</div>
                 </div>
                 <div className=' flex justify-center my-4'>
-                    <Link  href={"/cards/moblile"}><a className='transtion duration-200 hover:bg-customGray-200 rounded-full px-6 text-xl py-3 bg-gray-200 text-black'>Browse 5000 + products</a></Link>
+                    <Link  href={"/cards/all-gift-cards"}><a className='transtion duration-200 hover:bg-customGray-200 rounded-full px-6 text-xl py-3 bg-gray-200 text-black'>Browse 5000 + products</a></Link>
                 </div>
             </div>
         </div>
