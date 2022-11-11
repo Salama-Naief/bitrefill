@@ -22,7 +22,7 @@ const HeadBar=({pages})=>{
     const [cartProduct,setCartProduct]=useState([]);
     const [user,setUser]=useState(null);
     const [featuredMenu,setFeaturedMenu]=useState(false);
-    const [menuCart,setMenuCart]=useState(false);
+    const [cardCategory,setCardCategory]=useState([]);
     const {t,i18n} =useTranslation();
     const [searchProducts,setSearchProducts]=useState(null);
     const [searchMenu,setSearchMenu]=useState(false);
@@ -37,38 +37,18 @@ const HeadBar=({pages})=>{
     {name:"Vodafone Refill",img:"https://www.bitrefill.com/content/cn/b_rgb%3Affffff%2Cc_pad%2Ch_151%2Cw_250/v1556099168/vodafone.jpg"}
   ]
 
-console.log(searchMenu)
-    const handleMenus=(type)=>{
-      switch (type) {
-       
-        case 'cart':
-          setMenItems(false)     
-          setMenuCart(true)
-          break;
-          case 'heart':
-          setMenItems(false)     
-          setMenuCart(false)
-          break;
-        case 'items':
-          setMenItems(true)    
-          setMenuCart(false)
-          break;
-        
-        default:
-          setMenItems(false)
-          setMenuCart(false)
-      }
-      
-    }
+  useEffect(()=>{
+    const categoryArry=[]
+      cards.map(card=>{
+         if(!categoryArry.includes(card.category)){
+          categoryArry.push(card.category)
+         }
+      })
+      setCardCategory(categoryArry)
+  },[])
 
-const handleChandeLang=(e)=>{
-  i18n.changeLanguage(e.target.value)
-  //window.Weglot.switchTo(e.target.value)
-}
-   const handleLogout=()=>{
-    dispatch({type:"USER_LOGOUT"})
-   
-   }
+console.log(searchMenu)   
+
 
  
 
@@ -94,12 +74,12 @@ const handleChandeLang=(e)=>{
                             
                               <div className=" hidden  lg:flex w-full justify-end items-center mx-1">
                                 <Link href="/login">
-                                  <a className={`${darkMode?"bg-dark-100 text-white hover:bg-customGray-200":"bg-customGray-100 text-main hover:bg-customGray-200"} transition duration-200 rounded-full mx-2 px-4 py-1.5  capitalize text-ld font-semibold`}>
+                                  <a className={`active:scale-90 ${darkMode?"bg-dark-100 text-white hover:bg-customGray-200":"bg-customGray-100 text-main hover:bg-customGray-200"} transition duration-200 rounded-full mx-2 px-4 py-1.5  capitalize text-ld font-semibold`}>
                                     login
                                   </a>
                                 </Link>
                                 <Link href="/register">
-                                  <a className="transition duration-200 hover:bg-secondary-200  rounded-full mx-2 px-4 py-1.5 bg-secondary-100 text-white capitalize  lg:text-lg font-semibold">
+                                  <a className="active:scale-90 transition duration-200 hover:bg-secondary-200  rounded-full mx-2 px-4 py-1.5 bg-secondary-100 text-white capitalize  font-semibold">
                                     create account
                                   </a>
                                 </Link>
@@ -121,9 +101,9 @@ const handleChandeLang=(e)=>{
                             </div>
                             <div className={`${darkMode?"hover:bg-dark-100":"hover:bg-customGray-100"} py-2 rounded-full flex justify-end relative px-2 md:px-4`} >
                               <Link href={"/checkout"}><a>
-                                <MdOutlineShoppingCart className="text-xl md:text-4xl cursor-pointer"/>
+                                <MdOutlineShoppingCart className="text-xl md:text-3xl cursor-pointer"/>
                               </a></Link>
-                                <div className="absolute text-sm md:text-base text-white bg-secondary-100 bottom-4 z-10 md:bottom-8 right-0 px-1 md:px-1.5 rounded-full">0</div>
+                                <div className="absolute text-sm  text-white bg-secondary-100 bottom-4 z-10 md:bottom-8 right-0 px-1 md:px-1.5 rounded-full">{state.cart.cartItems&&(state.cart.cartItems.length>0?state.cart.cartItems.length:"0")}</div>
                             </div>
                             </div>
                         </div>
@@ -141,7 +121,7 @@ const handleChandeLang=(e)=>{
                               {
                                 cardFeaturesLinks.map((link,index)=>(
                                   <div key={index} className="py-1 hover:underline">
-                                    <Link href={"/"} passHref>
+                                    <Link href={`/cards/${link.toLowerCase().trim().replace(/ /g,"-")}`} passHref>
                                       <a>{link}</a>
                                     </Link>
                                   </div>
@@ -156,10 +136,10 @@ const handleChandeLang=(e)=>{
                             <div className="text-sm font-semibold">Categories</div>
                             <div className="text-sm flex flex-wrap font-sans">
                               {
-                                cards.map((card,index)=>(
-                                  <div key={card.id} className="py-1 hover:underline w-1/3">
-                                    <Link href={"/"} passHref>
-                                      <a>{card.category}</a>
+                                  cardCategory.map((card,index)=>(
+                                  <div key={index} className="py-1 hover:underline w-1/3">
+                                    <Link href={`/cards/${card.toLowerCase()}`} passHref>
+                                      <a>{card}</a>
                                     </Link>
                                   </div>
                                 ))
@@ -175,7 +155,7 @@ const handleChandeLang=(e)=>{
                               {
                                 cardPopularLinks.map((link,index)=>(
                                   <div key={index} className="py-1 hover:underline">
-                                    <Link href={"/"} passHref>
+                                    <Link href={`/card/${link.toLowerCase()}`} passHref>
                                       <a>{link}</a>
                                     </Link>
                                   </div>
@@ -214,7 +194,7 @@ const handleChandeLang=(e)=>{
                                 phoneCategoryLinks.map((link,index)=>(
                                   <div key={index} className="py-1 hover:underline w-1/3">
                                     <Link href={"/"} passHref>
-                                      <a>{link}</a>
+                                      <a className="whitespace-nowrap">{link}</a>
                                     </Link>
                                   </div>
                                 ))

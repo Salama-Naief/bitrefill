@@ -15,7 +15,7 @@ function ReviewSection() {
        <div className=' container mx-auto  lg:w-2/3 py-24'>
         <div className='flex md:flex-row  flex-col justify-center w-full pb-24'>
           <div className='mx-4 text-center md:w-1/2'>
-            <ReviewStars/>
+            <ReviewStars size="text-2xl md:text-3xl" postion="text-center flex w-full justify-center"/>
             <div className='font-blod text-xl my-4'>Over 500 reviews with an avg 4.9 rating</div>
             <div className='font-semibod my-4'>
               <Link href={"#"} passHref>
@@ -26,7 +26,7 @@ function ReviewSection() {
             </div>
           </div>
           <div className='mx-4 px-4 shadow md:w-1/2'>
-             <ReviewSlider/>
+             <ReviewSlider />
           </div>
         </div>
           

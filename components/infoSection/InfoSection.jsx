@@ -2,12 +2,12 @@ import React from 'react'
 import { useContext } from 'react';
 import { Store } from '../../utils/Store';
 
-function DetailsSection() {
+function DetailsSection({collectionColor}) {
 
   const {state} =useContext(Store);
     const {darkMode}=state;
   return (
-    <div className={`${darkMode?"bg-customGray-200 text-white":"bg-customGray-100 text-main"}`}>
+    <div className={`${darkMode?"bg-customGray-200 text-white":"bg-customGray-100 text-main"}`} style={collectionColor&&{backgroundColor:collectionColor,color:"white"}}>
     <div className='container mx-auto '>
       <div className='py-20 flex justify-center flex-col md:flex-row md:justify-around'>
         <div className=' relative py-4 flex justify-center '>

@@ -169,8 +169,23 @@ function Card() {
   )
 }
 
+export async function getStaticPaths({locales}){
+  const paths=[{params:{type:"top-products"},locale:locales[0]},{params:{type:"top-products"},locale:locales[1]},
+       {params:{type:"all-gift-cards"},locale:locales[0]},{params:{type:"all-gift-cards"},locale:locales[1]},
+      ]
+  cards.map(card=>{
+     locales.map(locale=>{
+        paths.push({params:{type:card.category.toLocaleLowerCase().trim().replace(/ /g,"-")},locale})
+     })
+  })
 
-export async function getServerSideProps({locale}) {
+  return {
+      paths,
+      fallback: false
+  }
+}
+
+export async function getStaticProps({locale}) {
   
   try{
    

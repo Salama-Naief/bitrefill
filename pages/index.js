@@ -5,7 +5,7 @@ import { useContext, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import  { Store } from '../utils/Store';
 import {serverSideTranslations} from "next-i18next/serverSideTranslations"
-import BannerSection from '../components/bannerSection/BannerSection';
+import HomeBanner from '../components/bannerSection/HomeBanner';
 import InfoSection from '../components/infoSection/InfoSection';
 import ReviewSection from '../components/reviewSection/ReviewSection';
 import Collections from '../components/collectionSection/Collections';
@@ -31,7 +31,7 @@ import Collections from '../components/collectionSection/Collections';
   return (
     <Layout title="home page"  pages={[]} desc="home page" >
     <div className={`${darkMode?"bg-main text-white":"bg-white text-main"} `}>
-      <BannerSection/>
+      <HomeBanner/>
       <InfoSection/>
       <ReviewSection/>
       <Collections/>

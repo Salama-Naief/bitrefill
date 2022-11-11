@@ -60,24 +60,37 @@ export const collections=[
         id:1,
         title:"intertainment",
         img:"https://www.bitrefill.com/content/cn/f_auto%2Cw_600/v23/landing%2Fstreaming-category-link.jpg",
-        color:"#C20000"
+        color:"#C20000",
+        video:"/video/entertainment-category-video.webm",
+        subtitle:"Stream Movies with Bitcoin",
+        desc:"With Bitrefill you can stream all your favorite movies, tv shows, music, and podcasts while paying with crypto. And earning up to 10% in Sats-back rewards"
     },
     {
         id:2,
         title:"gaming",
         img:"https://www.bitrefill.com/content/cn/f_auto%2Cw_600/v23/landing%2Fgaming-category-link.jpg",
-        color:"#6E00FF"
+        color:"#6E00FF",
+        video:"/video/gaming-category-video.webm",
+        subtitle:"Buy Video Games with Bitcoin",
+        desc:"Bitrefill makes it easy to use your cryptocurrency on the top gaming platform and earn up to 10% rewards."
+        
     },
     {
         id:3,
         title:"travel",
         img:"https://www.bitrefill.com/content/cn/f_auto%2Cw_600/v23/landing%2Ftravel-category-link.jpg",
-        color:"#24AFFF"
+        color:"#24AFFF",
+        video:"/video/travel-category-video.webm",
+        subtitle:"Travel Anywhere With",
+        desc:"Bitrefill helps you book flights and hotels anywhere in the world using cryptocurrency, and earn up to 10% rewards"
     },
     {
         id:4,
         title:"food",
-        img:"https://www.bitrefill.com/content/cn/f_auto%2Cw_600/v23/landing%2Ftravel-category-link.jpg",
-        color:"#C20000"
+        img:"https://www.bitrefill.com/content/cn/f_auto%2Cw_600/v23/landing%2Ffood-category-link.jpg",
+        color:"#FF6A00",
+        video:"/video/food-category-video.webm",
+        subtitle:"Buy Food with Bitcoin",
+        desc:"Bitrefill makes it easy to use your cryptocurrency and earn up to 10% rewards at top restraurants and delivery services"
     },
 ]

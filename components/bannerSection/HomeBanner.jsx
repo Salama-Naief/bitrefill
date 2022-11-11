@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import React from 'react'
 
-function BannerSection() {
+function HomeBanner() {
   return (
     <div className=' relative'>
         <div className="bg-main w-full h-64 lg:h-screen md:h-96 relative overflow-hidden">
@@ -32,4 +32,4 @@ function BannerSection() {
   )
 }
 
-export default BannerSection
+export default HomeBanner
