@@ -81,8 +81,8 @@ console.log("QRImg",QRImg)
                        <hr/>
                        <div className='py-4 '>
                         {
-                          cart.cartItems.length>0?cart.cartItems.map(item=>(
-                            <div className='flex items-center justify-between my-4'>
+                          cart.cartItems.length>0?cart.cartItems.map((item,index)=>(
+                            <div key={index} className='flex items-center justify-between my-4'>
                             <div className='flex items-center'>
                             <div className='relative w-16 h-12 mx-2 border'>
                                <Image src={item.img} layout='fill' objectFit='cover' objectPosition="center" alt=''/>

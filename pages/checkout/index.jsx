@@ -49,8 +49,8 @@ function Checkout() {
                        <div className='text-xl font-semibold'>Order details </div>
                        <div className='py-4 '>
                         {
-                          cart.cartItems.length>0?cart.cartItems.map(item=>(
-                            <div className='flex items-center justify-between my-4'>
+                          cart.cartItems.length>0?cart.cartItems.map((item,index)=>(
+                            <div key={index} className='flex items-center justify-between my-4'>
                             <div className='flex items-center'>
                             <div className='relative w-16 h-12 mx-2 border'>
                                <Image src={item.img} layout='fill' objectFit='cover' objectPosition="center" alt=''/>
@@ -89,7 +89,7 @@ function Checkout() {
                         <input type="checkbox" onChange={(e)=>setNewsletterCheckbox(e.target.checked)} className={`w-7 h-4 accent-secondary-100 my-3`}/><span className='mx-2  text-sm text-gray-500'>Add me to the newsletter to receive news about new products and features</span><br/>
                         <input type="checkbox" required onChange={(e)=>setAgreeCheckbox(e.target.checked)} className={`w-7 h-4 accent-secondary-100 my-3`}/><span className='mx-2  indeterminate:bg-secondary-200 text-sm text-gray-500'>I have read and agree with the Bitrefill <Link href={"/"}><a className=" underline font-semibold">Terms & Conditions</a></Link>  and the <Link href={"/"}><a className=" font-semibold underline">Privacy Policy</a></Link> </span>
                       </div>
-                    <button type="submit" disabled={!agreeCheckbox} className={`${agreeCheckbox?"bg-secondary-100":"bg-secondary-200"} transition duration-200 hover:bg-secondary-200 p-2 rounded-full mx-2 px-4  text-white capitalize font-semibold w-full font-sans mt-4`}>{loading?<SmallLoader/>:"continue"}</button>  
+                    <button type="submit" disabled={!agreeCheckbox} className={`${agreeCheckbox?"bg-secondary-100":"bg-secondary-200"} transition duration-200 hover:bg-secondary-200 p-2 rounded-full mx-2 px-4  text-white capitalize font-semibold w-full font-sans mt-4`}>continue</button>  
                     </form>:
                     <div className='px-2'>
                       <div className= 'bg-gray-100 py-2 rounded text-center'>You can <Link href={"/login"}><a className='mx-1 text-customGray-200 font-bold '>Login</a></Link>or <Link href={"/register"}><a className=' font-bold mx-1 text-customGray-200'>Register</a></Link></div>
