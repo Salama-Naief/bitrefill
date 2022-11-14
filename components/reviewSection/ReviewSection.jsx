@@ -1,3 +1,4 @@
+
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react'
@@ -18,8 +19,8 @@ function ReviewSection() {
             <ReviewStars size="text-2xl md:text-3xl" postion="text-center flex w-full justify-center"/>
             <div className='font-blod text-xl my-4'>Over 500 reviews with an avg 4.9 rating</div>
             <div className='font-semibod my-4'>
-              <Link href={"#"} passHref>
-                 <a>
+              <Link href={"/reviews"} passHref>
+                 <a className='underline'>
                   <span>read Reviews</span>
                  </a>
                </Link>

@@ -27,7 +27,7 @@ export default function Login({pages}) {
 
  // handle loin
   const handleSubmit=async(e)=>{
-
+     dispatch({type:"ADD_USER",payload:{email}})
   }
   return (
    <Layout title="login">

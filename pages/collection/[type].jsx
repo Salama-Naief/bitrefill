@@ -38,9 +38,9 @@ import Link from 'next/link';
        <div className='flex text-center items-center justify-center w-full h-72' style={{backgroundColor:collection.color}}>
         <div>
           <h1 className='font-bold text-2xl md:text-3xl my-4 text-white'>Over 5,000 Products</h1>
-       <div className='my-6 w-full'>
+       <div className='my-6 w-full rounded-full text-center py-3 active:scale-90 transition duration-200 ease-in-out bg-white text-main hover:bg-customGray-100 font-bold capitalize'>
           <Link href={`/cards/top-products`}>
-            <a className='w-full px-32  rounded-full text-center py-3 active:scale-90 transition duration-200 ease-in-out bg-white text-main hover:bg-customGray-100 font-bold capitalize' style={{color:collection.color}}>Browse More</a>
+            <a className='' style={{color:collection.color}}>Browse More</a>
         </Link>
         </div>
         </div>

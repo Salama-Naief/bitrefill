@@ -11,10 +11,10 @@ function CardItems({card,withOnlyImg,relatedCards}) {
     return;
   }
   return (
-    <div onMouseEnter={()=>setCardHover(true)} onMouseLeave={()=>setCardHover(false)} className=' overflow'>
+    <div onMouseEnter={()=>setCardHover(true)} onMouseLeave={()=>setCardHover(false)} className='border'>
         <Link href={`/card/${card.title.trim().toLowerCase().replace(/ /g,"-")}`}>
           <a>
-          <motion.div animate={cardHover?{y:-5}:{y:0}} className='w-full h-36  md:h-40 lg:h-52 relative'>
+          <motion.div animate={cardHover?{y:-5}:{y:0}} className='w-full h-36  md:h-40 lg:h-56 relative'>
               <Image src={card.img} layout="fill" objectFit='fill' objectPosition="center" alt={card.title}/>
           </motion.div>
           { !withOnlyImg&&<div className='p-2'>

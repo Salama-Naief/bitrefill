@@ -19,6 +19,27 @@ export const reviews=[
         email:"@TelOnTI",
         message:"Hey try @bitrefill you can literally buy anything you need in bitcoin",
         img:"/img/3.webp"
+    },
+    {
+        id:4,
+        name:"Tel On The Internet",
+        email:"@TelOnTI",
+        message:"Hey try @bitrefill you can literally buy anything you need in bitcoin",
+        img:"/img/1.webp"
+    },
+    {
+        id:5,
+        name:"Tel On The Internet",
+        email:"@TelOnTI",
+        message:"Hey try @bitrefill you can literally buy anything you need in bitcoin",
+        img:"/img/2.webp"
+    },
+    {
+        id:6,
+        name:"Tel On The Internet",
+        email:"@TelOnTI",
+        message:"Hey try @bitrefill you can literally buy anything you need in bitcoin",
+        img:"/img/3.webp"
     }
 ]
 

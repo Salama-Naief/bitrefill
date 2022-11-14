@@ -8,7 +8,7 @@ import Image from 'next/image';
 import { useState } from 'react';
 import { MdOutlineClear } from 'react-icons/md';
 import {  MdArrowBackIosNew,MdKeyboardArrowDown, MdArrowForwardIos } from "react-icons/md"
-import OptionsLayout from '../layout/OptionsLayout';
+import OptionsLayout from '../overlay/OptionsOverLay';
 import { GrLanguage } from 'react-icons/gr';
 import { AiOutlineQuestionCircle } from 'react-icons/ai';
 

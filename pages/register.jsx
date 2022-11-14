@@ -27,7 +27,7 @@ export default function Register() {
 
  // handle loin
   const handleSubmit=async(e)=>{
-
+    dispatch({type:"ADD_USER",payload:{email}})
   }
   return (
    <Layout title="login">

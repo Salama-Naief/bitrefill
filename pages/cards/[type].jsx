@@ -69,7 +69,7 @@ function Card() {
       setTravelCards(cards.filter(c=>c.category.toLocaleLowerCase()==="travel"))
       setGamesCards(cards.filter(c=>c.category.toLocaleLowerCase()==="games"))
     }else{
-      const items=cards.filter(card=>card.category.toLocaleLowerCase()===query.type.toLocaleLowerCase())
+      const items=cards.filter(card=>card.category.toLocaleLowerCase().trim().replace(/ /g,"-")===query.type.toLocaleLowerCase().trim().replace(/ /g,"-"))
       setCardsItems(items)
     }
        
@@ -116,7 +116,7 @@ function Card() {
                   {
                     cardCategory.map((card,index)=>(
                       <div key={index} className={`${query.type.toLocaleLowerCase()===card.toLocaleLowerCase()?"text-secondary-100":"text-inherit"} py-2 font-semibold`}>
-                        <Link href={`/cards/${card.toLocaleLowerCase()}`}><a className='hover:underline transition duration-200 ease-in-out'>{card}</a></Link>
+                        <Link href={`/cards/${card.toLocaleLowerCase().trim().replace(/ /g,"-")}`}><a className='hover:underline transition duration-200 ease-in-out'>{card}</a></Link>
                       </div>
                     ))
                   }
@@ -126,9 +126,9 @@ function Card() {
                 {travelCards.length>0&&<CardSlider title="For Your Travel Needs" category="travel" desc="Need new clothes, books or a computer? We got you!" cards={travelCards}/>}
                 {gamesCards.length>0&&<CardSlider title="Gaming Cards We Love" category="games" desc="" cards={gamesCards}/>}
                 {ecommerceCards.length>0&&<CardSlider title="Ecommerce Picks" category="ecommerce" desc="" cards={ecommerceCards}/>}
-                  <div className='py-6 flex items-center justify-between px-2'>
+                  <div className='py-6 flex flex-col md:flex-row items-center justify-between px-2'>
                      <h1 className='text-2xl md:text-3xl font-bold capitalize'>{query.type}</h1>
-                     <div className='flex items-center'>
+                     <div className='flex items-center my-4 md:my-0'>
                       <span className='px-2.5'>Sort by:</span>
                         <select name="" id="" value={sorteType} onChange={(e)=>setSortType(e.target.value)} className='px-6 py-1 focus:outline-none rounded-full border-none  appearance-none ring-2 ring-customGray-200 ring-inherit bg-inherit text-inherit'>
                         <option value="featured" className={`${darkMode?"bg-dark-100 text-white":"bg-white text-main"} border text-inherit`}>Featured</option>

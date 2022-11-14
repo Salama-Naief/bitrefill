@@ -20,11 +20,11 @@ function CollectionBanner({collection}) {
                   <div className='font-sans text-white w-full  md:w-1/2'>
                   <h1 className='font-bold text-2xl md:text-3xl my-4'>{collectionItems.subtitle}</h1>
                   <p className=''>{collectionItems.desc}</p>
-                  </div>
-                  <div className='my-6 w-full'>
-                    <Link href={`/cards/${collectionItems.title.toLowerCase()}`}>
-                     <a className='w-full px-16  rounded-full text-center py-3 active:scale-90 transition duration-200 ease-in-out bg-white text-main hover:bg-customGray-100 font-bold capitalize' style={{color:collectionItems.color}}>Browse {collectionItems.title} Gift Cards</a>
-                  </Link>
+                    <div className='my-6 w-full  rounded-full text-center py-3 active:scale-90 transition duration-200 ease-in-out bg-white text-main hover:bg-customGray-100 font-bold capitalize'>
+                        <Link href={`/cards/${collectionItems.title.toLowerCase()}`}>
+                        <a className='' style={{color:collectionItems.color}}>Browse {collectionItems.title} Gift Cards</a>
+                      </Link>
+                    </div>
                   </div>
                   
                   <div className='flex items-center text-white py-2'>

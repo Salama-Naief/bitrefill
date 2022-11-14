@@ -13,40 +13,37 @@ import ReviewStars from "../../components/reviewSection/ReviewStars"
 import CardItems from "../../components/cards/CardItems"
 import DetailsSection from "../../components/infoSection/DetailsSection"
 import QuestionSection from "../../components/infoSection/QuestionSection"
+import SecurityInfoSection from "../../components/infoSection/SecurityInfoSecton"
 import Link from 'next/link'
 import { useState } from 'react'
 import {MdKeyboardArrowDown, MdKeyboardArrowUp, MdOutlineShoppingCart} from "react-icons/md"
 import {BsCurrencyDollar, BsCurrencyEuro, BsCurrencyPound,BsCurrencyBitcoin} from "react-icons/bs"
+import PurshaseGiftOverlay from '../../components/overlay/PurshaseGiftOverlay'
 
 function SingleCard() {
     const router=useRouter()
     const {state,dispatch} =useContext(Store);
     const {darkMode}=state;
-    const [priceType,setPriceType]=useState({img:"/img/eg-flag.png",amount:6})
+    const [priceType,setPriceType]=useState({amount:6})
     const [priceMenu,setPriceMenu]=useState(false)
     const [cardDetails,setCardDetails]=useState("Description")
     const [price,setPrice]=useState(0)
+    const [purshaseGift,setPurshaseGift]=useState(false)
     const title=router.query.type?router.query.type.replace(/-/g," "):"";
     const card=cards.find(c=>c.title.toLocaleLowerCase()===title.toLocaleLowerCase());
     const relatedCards=cards.filter(c=>c.category===card.category)
     
-    const currency=[
-      {item:"<BsCurrencyDollar className=''/>",name:"USD", amount:"12"},
-      {item:"<BsCurrencyDollar className=''/>",name:"UAD", amount:"12"},
-      {item:"<BsCurrencyDollar className=''/>",name:"CAD", amount:"12"},
-      {item:"<BsCurrencyEuro className=''/>",name:"Euro", amount:"12"},
-      {item:"<BsCurrencyPound className=''/>",name:"GBP", amount:"12"},
-      {item:"<BsCurrencyBitcoin className=''/>",name:"bitcion", amount:"12"},
-    ]
+   
     const handleCartShippig=(e)=>{
       e.preventDefault()
-      dispatch({type:"ADD_TO_CART",payload:{...card,price}}) 
+      dispatch({type:"ADD_TO_CART",payload:{...card,price,amount:1}}) 
+      dispatch({type:"UPDATE_SHIPPING_MENU",payload:true}) 
     }
     console.log("state",state)
   return (
     <Layout title={title}>
-         <div className={`${darkMode?"bg-dark-200 text-white":"bg-white text-main"}`}>
-
+         <div className={`${darkMode?"bg-dark-200 text-white":"bg-white text-main"} relative`}>
+             {purshaseGift&&<PurshaseGiftOverlay card={card} setPurshaseGift={setPurshaseGift} price={price}/>}
             <div className='container mx-auto'>
                 <div className=' md:grid grid-cols-2 '>
                   <div className=' md:p-8 h-fit md:sticky top-0'>
@@ -80,10 +77,10 @@ function SingleCard() {
 
                        <form onSubmit={(e)=>handleCartShippig(e)}>
                           <div className='font-bold font-sans text-xl py-4'>Enter the amount</div>
-                          <div className='flex items-center relative'>
+                          <div className='md:flex items-center relative'>
 
                              <input type="number" onChange={(e)=>setPrice(e.target.value)} required min={card.priceFrom} max={card.priceTo} className={`${darkMode?"focus:ring-secondary-100":"focus:ring-main"}  appearance-none w-64 py-1.5 text-customGray-200  rounded-xl px-4 outline-none ring-2 ring-gray-200 md:text-xl`} placeholder={`$${card.priceFrom}-${card.priceTo}`}/>
-                             <div className='mx-8 relative'>
+                             <div className='m-4 md:mx-8 relative'>
                               
                                 <dev onClick={()=>setPriceMenu(!priceMenu)} className='cursor-pointer font-sans '>
                                   <div className='font-semibold text-sm md:text-base'>Estimated price</div>
@@ -134,7 +131,7 @@ function SingleCard() {
                             <MdOutlineShoppingCart className='text-2xl'/>
                               <span className='font-semibold'>Add to card</span> 
                           </button>
-                          <button className='my-4 md:my-0 md:mx-4 w-full md:w-1/3 flex items-center justify-center py-2.5 rounded-full active:scale-90 transition duration-200 ease-in-out bg-customGray-100 hover:bg-customGray-200 text-main'>
+                          <button onClick={()=>setPurshaseGift(true)} className='my-4 md:my-0 md:mx-4 w-full md:w-1/3 flex items-center justify-center py-2.5 rounded-full active:scale-90 transition duration-200 ease-in-out bg-customGray-100 hover:bg-customGray-200 text-main'>
                             <ImGift className='text-2xl mx-1'/>
                             <span className='font-semibold text-sm'>Purshase as gift </span>
                           </button>
@@ -229,7 +226,11 @@ function SingleCard() {
                       </Link>
                     </div>
                     <DetailsSection/>
+                    <div className='my-4'>
+                    <SecurityInfoSection/>
+                    </div>
                     <QuestionSection/>
+                    
                 </div>
             </div>
          </div>

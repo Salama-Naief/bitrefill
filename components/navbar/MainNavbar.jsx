@@ -13,19 +13,22 @@ import dynamic from "next/dynamic";
 import { cards } from "../../utils/dumycards";
 import FeaturesMenu from "../menus/FeaturesMenu";
 import SearchInput from "../search/SearchInput";
+import ShippingCartMenu from "../menus/ShippingCartMenu";
+import UserMenu from "../menus/UserMenu";
 
 
 const HeadBar=({pages})=>{
     const router =useRouter();
     const {state,dispatch} =useContext(Store);
-    const {darkMode}=state;
+    const {darkMode,shippingMenu,user}=state;
     const [cartProduct,setCartProduct]=useState([]);
-    const [user,setUser]=useState(null);
     const [featuredMenu,setFeaturedMenu]=useState(false);
     const [cardCategory,setCardCategory]=useState([]);
     const {t,i18n} =useTranslation();
     const [searchProducts,setSearchProducts]=useState(null);
     const [searchMenu,setSearchMenu]=useState(false);
+    const [shippingCartMenu,setShippingCartMenu]=useState(false);
+    const [userMenu,setUserMenu]=useState(false);
     
    const cardFeaturesLinks=["All gift cards","Popular","Recently Added","Rewards"]
    const cardPopularLinks=["Uber","Etisalat","Vodafone","PUBG Mobile UC","Orange","Noon.com"]
@@ -47,7 +50,8 @@ const HeadBar=({pages})=>{
       setCardCategory(categoryArry)
   },[])
 
-console.log(searchMenu)   
+
+ 
 
 
  
@@ -55,6 +59,8 @@ console.log(searchMenu)
 
     return(
       <div className={`${darkMode?"bg-dark-200 text-white":"bg-wite text-main"} border-b relative`}>
+        {(shippingCartMenu||shippingMenu)&&<ShippingCartMenu setShippingCartMenu={setShippingCartMenu}/>}
+        {userMenu&&<UserMenu setUserMenu={setUserMenu}/>}
            <div className="container  mx-auto ">
             <div className={` bg-inherit text-inherit w-full flex items-center justify-between py-2 px-2 md:px-0 shadow-sm md:shadow-none `}> 
                   <div className="flex items-center " >
@@ -71,7 +77,8 @@ console.log(searchMenu)
                         <div className="w-1/2 md:w-1/3 flex  items-center">
                         
                             <div className=" w-full items-center flex justify-end">
-                            
+                            {
+                              !user?
                               <div className=" hidden  lg:flex w-full justify-end items-center mx-1">
                                 <Link href="/login">
                                   <a className={`active:scale-90 ${darkMode?"bg-dark-100 text-white hover:bg-customGray-200":"bg-customGray-100 text-main hover:bg-customGray-200"} transition duration-200 rounded-full mx-2 px-4 py-1.5  capitalize text-ld font-semibold`}>
@@ -84,7 +91,13 @@ console.log(searchMenu)
                                   </a>
                                 </Link>
                               </div>
-                           
+                              :(
+                                <div className="flex items-center">
+                                    <div onClick={()=>setUserMenu(true)} className={`cursor-pointer active:scale-90 ${darkMode?"bg-dark-100 text-white hover:bg-customGray-200":"bg-customGray-100 text-main hover:bg-customGray-200"} transition duration-200 rounded-full mx-2 px-4 py-1.5  capitalize text-ld font-semibold `}>S</div>
+                                    <div className="mx-1">$0</div>
+                                </div>
+                              )
+                           }
                            <div className={`${darkMode?"hover:bg-dark-100":"hover:bg-customGray-100"} lg:hidden py-2 rounded-full`} >
                                 <MdOutlineSearch onClick={()=>setSearchMenu(true)} className="text-2xl cursor-pointer"/> 
                                 {searchMenu&&<div className={`${darkMode?"bg-dark-200 text-white":"bg-white text-main"} z-40 py-16 text-center fixed top-0 left-0 w-full h-screen`}>
@@ -99,10 +112,9 @@ console.log(searchMenu)
                                 </a>
                               </Link> 
                             </div>
-                            <div className={`${darkMode?"hover:bg-dark-100":"hover:bg-customGray-100"} py-2 rounded-full flex justify-end relative px-2 md:px-4`} >
-                              <Link href={"/checkout"}><a>
+                            <div onClick={()=>setShippingCartMenu(true)} className={`${darkMode?"hover:bg-dark-100":"hover:bg-customGray-100"} py-2 rounded-full flex justify-end relative px-2 md:px-4`} >
+                              
                                 <MdOutlineShoppingCart className="text-xl md:text-3xl cursor-pointer"/>
-                              </a></Link>
                                 <div className="absolute text-sm  text-white bg-secondary-100 bottom-4 z-10 md:bottom-8 right-0 px-1 md:px-1.5 rounded-full">{state.cart.cartItems&&(state.cart.cartItems.length>0?state.cart.cartItems.length:"0")}</div>
                             </div>
                             </div>
@@ -138,7 +150,7 @@ console.log(searchMenu)
                               {
                                   cardCategory.map((card,index)=>(
                                   <div key={index} className="py-1 hover:underline w-1/3">
-                                    <Link href={`/cards/${card.toLowerCase()}`} passHref>
+                                    <Link href={`/cards/${card.toLowerCase().trim().replace(/ /g,"-")}`} passHref>
                                       <a>{card}</a>
                                     </Link>
                                   </div>
@@ -176,7 +188,7 @@ console.log(searchMenu)
                               {
                                 phoneFeaturesLinks.map((link,index)=>(
                                   <div key={index} className="py-1 hover:underline">
-                                    <Link href={"/"} passHref>
+                                    <Link href={"/refill"} passHref>
                                       <a>{link}</a>
                                     </Link>
                                   </div>
@@ -193,7 +205,7 @@ console.log(searchMenu)
                               {
                                 phoneCategoryLinks.map((link,index)=>(
                                   <div key={index} className="py-1 hover:underline w-1/3">
-                                    <Link href={"/"} passHref>
+                                    <Link href={`/cards/${link.toLocaleLowerCase().trim().replace(/ /g,"-")}`} passHref>
                                       <a className="whitespace-nowrap">{link}</a>
                                     </Link>
                                   </div>

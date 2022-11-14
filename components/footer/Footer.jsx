@@ -5,7 +5,7 @@ import {useTranslation} from "next-i18next"
 import { Store } from '../../utils/Store';
 import Image from 'next/image';
 import {FiFacebook,FiInstagram,FiTwitter} from "react-icons/fi"
-import OptionsLayout from '../layout/OptionsLayout';
+import OptionsLayout from '../overlay/OptionsOverLay';
 
 
 export default  function Footer() {

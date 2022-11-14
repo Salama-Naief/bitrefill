@@ -8,7 +8,7 @@ import { useState } from 'react';
 import Image from 'next/image';
 import { useTranslation } from 'next-i18next';
 import dynamic from 'next/dynamic';
-import OptionsLayout from '../layout/OptionsLayout';
+import OptionsLayout from '../overlay/OptionsOverLay';
 
 function TopNavbar() {
   const {state,dispatch} =useContext(Store);
