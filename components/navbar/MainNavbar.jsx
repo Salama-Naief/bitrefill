@@ -51,12 +51,6 @@ const HeadBar=({pages})=>{
   },[])
 
 
- 
-
-
- 
-
-
     return(
       <div className={`${darkMode?"bg-dark-200 text-white":"bg-wite text-main"} border-b relative`}>
         {(shippingCartMenu||shippingMenu)&&<ShippingCartMenu setShippingCartMenu={setShippingCartMenu}/>}
@@ -93,7 +87,7 @@ const HeadBar=({pages})=>{
                               </div>
                               :(
                                 <div className="flex items-center">
-                                    <div onClick={()=>setUserMenu(true)} className={`cursor-pointer active:scale-90 ${darkMode?"bg-dark-100 text-white hover:bg-customGray-200":"bg-customGray-100 text-main hover:bg-customGray-200"} transition duration-200 rounded-full mx-2 px-4 py-1.5  capitalize text-ld font-semibold `}>S</div>
+                                    <div onClick={()=>setUserMenu(true)} className={`cursor-pointer active:scale-90 bg-gradient-to-b text-white from-orange-500 to-purple-500 transition duration-200 rounded-full mx-2 px-4 py-1.5  capitalize text-ld font-semibold `}>{user?user.email.trim().charAt(0):"0"}</div>
                                     <div className="mx-1">$0</div>
                                 </div>
                               )

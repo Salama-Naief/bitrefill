@@ -75,7 +75,7 @@ function ShippingCartMenu({setShippingCartMenu}) {
            <hr/>
            <div className='p-4 flex justify-between'>
                 <div className={`${darkMode?"bg-dark-200 hover:bg-dark-100":"bg-customGray-100 hover:bg-customGray-200"} text-sm font-semibold  rounded-full px-2 py-2`}>
-                    <Link href={"/cards/all-gift-card"}>
+                    <Link href={"/cards/top-products"}>
                         <a  onClick={()=>closeMenu()}>Keep Shipping</a>
                     </Link>
                 </div>

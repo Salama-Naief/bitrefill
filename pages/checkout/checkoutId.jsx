@@ -5,6 +5,7 @@ import {  MdArrowBackIosNew, MdArrowForwardIos } from "react-icons/md";
 import {  BsInfoCircle } from "react-icons/bs";
 import { useTranslation } from 'next-i18next';
 import { useContext } from 'react';
+import QRCode from 'qrcode'
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
@@ -12,6 +13,7 @@ import Image from 'next/image';
 import { paymentMethods } from '../../utils/dumyPayments'
 import OpenWalletOverlay from '../../components/overlay/OpenWellatOverlay';
 import WalletOverlay from '../../components/overlay/WalletOverlay';
+import { useEffect } from 'react';
 
 function CheckoutId() {
   const {state}=useContext(Store)
@@ -24,8 +26,19 @@ function CheckoutId() {
   const [QRImg,setQRImg]=useState("/img/qr-code.svg")
   const paymentMethod=cart.paymentMethod&&paymentMethods.find(c=>c.name===cart.paymentMethod.name)
 
-  
-console.log("QRImg",QRImg)
+
+
+  useEffect(()=>{
+     // With promises
+       QRCode.toDataURL('5d78c7e9-e2c6-4621-953f-65d5555d4b11')
+  .then(url => {
+    setQRImg(url)
+  })
+  .catch(err => {
+    console.error(err)
+  })
+  },[])
+ 
  // handle loin
   const handleSubmit=async(e)=>{
      e.preventDefault();
@@ -110,7 +123,7 @@ console.log("QRImg",QRImg)
                     </div>
                  </div>
                  <div className={`${darkMode?"bg-dark-100 text-white":"bg-white text-main"} rounded shadow p-8 m-4 relative`}>
-                  {openWalletOverlay&&<OpenWalletOverlay QRImg={QRImg} setCopyOverlay={setCopyOverlay} setOpenWalletOverlay={setOpenWalletOverlay}/>}
+                  {openWalletOverlay&&<OpenWalletOverlay item={paymentMethod.item} QRImg={QRImg} setCopyOverlay={setCopyOverlay} setOpenWalletOverlay={setOpenWalletOverlay}/>}
                     <span className='text-2xl font-semibold'>Payment</span>
                     <div className='flex items-center justify-center p-8'>
                       <div className='w-3/4'>

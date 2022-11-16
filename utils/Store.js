@@ -6,6 +6,7 @@ const initailState={
     shippingMenu:false,
     countary:Cookies.get("countary")?JSON.parse(Cookies.get("countary")):"egypt",
     user:Cookies.get("user")?JSON.parse(Cookies.get("user")):null,
+    wishlist:Cookies.get("wishlist")?JSON.parse(Cookies.get("wishlist")):[],
    cart:{
     cartItems:Cookies.get("shippingCartItems")?JSON.parse(Cookies.get("shippingCartItems")).item:[],
     paymentMethod:Cookies.get("paymentMethod")?JSON.parse(Cookies.get("paymentMethod")):"",
@@ -42,6 +43,22 @@ function reducer(state,action){
       Cookies.set("items",JSON.stringify(cartItems));
       return{...state,cart:{...state.cart,cartItems}}
     }
+    case "ADD_TO_WISHLIST":{
+      const newItem=action.payload;        
+      const existItem=state.wishlist.find(item=>item.id===newItem.id);
+      const wishlistItems=existItem?state.wishlist.map(item=>
+        item.id===existItem.id?newItem:item
+      ):[...state.wishlist,newItem];
+      console.log("wishlistItems",wishlistItems)
+
+       Cookies.set("wishlist",JSON.stringify(wishlistItems));
+      return{...state,wishlist:wishlistItems}
+    }
+    case "REMOVE_FROM_WISHLIST":{
+      const wishlistItems=state.wishlist.filter(item=>item.id!==action.payload.id);
+      Cookies.set("wishlist",JSON.stringify(wishlistItems));
+      return{...state,wishlist:wishlistItems}
+    }
     case "ADD_PAYMENT_METHOD":{ 
       Cookies.set("paymentMethod",JSON.stringify(action.payload));
       return{...state,cart:{...state.cart,paymentMethod:action.payload}}
@@ -53,6 +70,13 @@ function reducer(state,action){
     case "ADD_USER":{ 
       Cookies.set("user",JSON.stringify(action.payload));
       return{...state,user:action.payload}
+    }
+    case "SIGN_OUT":{ 
+      Cookies.remove("user");
+      Cookies.remove("wishlist");
+      Cookies.remove("paymentMethod");
+      Cookies.remove("shippingCartItems");
+      return{...state,user:null,wishlist:[],cart:{...state.cart,cartItems:[],wallet:null,paymentMethod:null}}
     }
 
       default : return state;

@@ -33,13 +33,24 @@ function SingleCard() {
     const card=cards.find(c=>c.title.toLocaleLowerCase()===title.toLocaleLowerCase());
     const relatedCards=cards.filter(c=>c.category===card.category)
     
+    const loved=state.wishlist.filter(c=>c.id===card.id)
    
+    console.log("loved",loved)
+
     const handleCartShippig=(e)=>{
       e.preventDefault()
       dispatch({type:"ADD_TO_CART",payload:{...card,price,amount:1}}) 
       dispatch({type:"UPDATE_SHIPPING_MENU",payload:true}) 
     }
-    console.log("state",state)
+
+    const handleWishlist=()=>{
+      if(loved.length>0){
+        dispatch({type:"REMOVE_FROM_WISHLIST",payload:card}) 
+      }else{
+        dispatch({type:"ADD_TO_WISHLIST",payload:card}) 
+      }
+    }
+  
   return (
     <Layout title={title}>
          <div className={`${darkMode?"bg-dark-200 text-white":"bg-white text-main"} relative`}>
@@ -51,8 +62,8 @@ function SingleCard() {
                         <div className='w-80 h-80 relative'>
                             <Image src={card.img} width={2} height={2} layout="fill"  alt={card.title}/>
                         </div>
-                        <div className={`${darkMode?"bg-dark-200":"bg-white"} transtion duration-200 hover:bg-secondary-100 cursor-pointer p-1 rounded-full absolute top-2 right-2 md:top-5 md:right-5`}>
-                        <HiHeart className={`text-customGray-200 text-2xl`} />
+                        <div onClick={()=>handleWishlist()} className={`${darkMode?"bg-dark-200":"bg-white"} ${loved.length>0&&"bg-secondary-100"} transtion duration-200 hover:bg-secondary-100 cursor-pointer p-1 rounded-full absolute top-2 right-2 md:top-5 md:right-5`}>
+                        <HiHeart className={`hover:text-white text-2xl ${loved.length>0?"text-white":"text-customGray-200"}`} />
                     </div>
                     </div>
                   </div>

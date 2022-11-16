@@ -6,7 +6,7 @@ import { MdOutlineClear } from 'react-icons/md';
 import { Store } from '../../utils/Store';
 import { paymentMethods } from '../../utils/dumyPayments';
 
-function OpenWalletOverlay({setOpenWalletOverlay,QRImg,setCopyOverlay}) {
+function OpenWalletOverlay({item,copy,setOpenWalletOverlay,QRImg,setCopyOverlay}) {
     const {state,dispatch} =useContext(Store);
     const {t,i18n} =useTranslation();
     const {darkMode}=state;
@@ -20,11 +20,11 @@ function OpenWalletOverlay({setOpenWalletOverlay,QRImg,setCopyOverlay}) {
       {!showQR&&<div className={`absolute ${i18n.language==="ar"?"left-3":"right-3"} top-3 cursor-pointer`} onClick={()=>setOpenWalletOverlay(false)}><MdOutlineClear className="text-3xl"/></div>}
       {!showQR&&<div>
         <h1 className='text-xl'>Trouble paying?</h1>
-          <div className='text-customGray-200'>If the expected app is not opening, please try copying the payment data or scanning the QR code.</div>
+          <div className='text-customGray-200 my-4'>If the expected app is not opening, please try copying the payment data or scanning the QR code.</div>
           <div className='my-4'>
-            <button onClick={()=>setCopyOverlay(true)} className='font-bold my-4 w-full  flex items-center justify-center py-2.5 rounded-full active:scale-90 transition duration-200 ease-in-out bg-customGray-100 hover:bg-customGray-200 text-main'>
+            {!copy&&<button onClick={()=>setCopyOverlay(true)} className='font-bold my-4 w-full  flex items-center justify-center py-2.5 rounded-full active:scale-90 transition duration-200 ease-in-out bg-customGray-100 hover:bg-customGray-200 text-main'>
             Copy
-          </button>
+          </button>}
             <button onClick={()=>setShowQR(true)} className='font-bold my-4 w-full  flex items-center justify-center py-2.5 rounded-full active:scale-90 transition duration-200 ease-in-out bg-customGray-100 hover:bg-customGray-200 text-main'>
                 <div className='relative w-4 h-4 border border-customGray-200 mx-2'>
                     <Image src={`${QRImg}`} layout='fill' objectFit='fill' objectPosition="center" alt='Qr-code'/>
@@ -41,7 +41,7 @@ function OpenWalletOverlay({setOpenWalletOverlay,QRImg,setCopyOverlay}) {
                 <Image src={`${QRImg}`} layout='fill' objectFit='fill' objectPosition="center" alt='Qr-code'/>
               </div>
               <div className='absolute top-0 left-0 w-full h-full flex  items-center justify-center'>
-                <div className='scale-150' dangerouslySetInnerHTML={{__html:paymentMethod.item}}/>
+                <div className='scale-150' dangerouslySetInnerHTML={{__html:item}}/>
               </div>
               </div>
               <button onClick={()=>setShowQR(false)} className='font-bold my-8 w-full  flex items-center justify-center py-2.5 rounded-full active:scale-90 transition duration-200 ease-in-out bg-customGray-100 hover:bg-customGray-200 text-main'>

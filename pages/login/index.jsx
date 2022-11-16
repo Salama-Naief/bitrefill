@@ -1,12 +1,12 @@
-import Layout from '../components/layout/Layout';
+import Layout from '../../components/layout/Layout';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import {useTranslation} from "next-i18next";
 import React, { useContext, useEffect, useState } from 'react';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import { Store } from '../utils/Store';
+import { Store } from '../../utils/Store';
 import Cookies from 'js-cookie';
-import SmallLoader from '../components/loading/SmallLoader';
+import SmallLoader from '../../components/loading/SmallLoader';
 
 export default function Login({pages}) {
    const {t,i18n}= useTranslation();
@@ -27,6 +27,7 @@ export default function Login({pages}) {
 
  // handle loin
   const handleSubmit=async(e)=>{
+   e.preventDefault();
      dispatch({type:"ADD_USER",payload:{email}})
   }
   return (
@@ -44,7 +45,7 @@ export default function Login({pages}) {
                <input type="email" onChange={(e)=>setEmail(e.target.value)} value={email} required className={`${darkMode?"focus:border-secondary-100 border-2 border-dark-200 bg-dark-100 text-white":"focus:border-customGray-200 border-2 border-gray-300 text-main bg-white"}  focus:outline-none transition duration-200  px-6 py-2 w-full h-full rounded-lg mb-6`} placeholder={t("common:email")}/>
                 <div className='text-sm text-customGray-200 px-2 pb-1'>password</div>
                <input type="password" minLength={8} onChange={(e)=>setPassword(e.target.value)} value={password} required className={`${darkMode?"focus:border-secondary-100 border-2 border-dark-200 bg-dark-100 text-white":"focus:border-customGray-200 border-2 border-gray-300 text-main bg-white"}  focus:outline-none transition duration-200  px-6 py-2 w-full h-full rounded-lg mb-2`} placeholder={t("common:password")}/>
-               <div className="  text-end text-sm pb-4"><Link href='/register'><a><span className="text-secondary cursor-pointer mx-1 underline font-semibold">forget password</span></a></Link></div>
+               <div className="  text-end text-sm pb-4"><Link href='/login/rest'><a><span className="text-secondary cursor-pointer mx-1 underline font-semibold">forget password</span></a></Link></div>
                <button type="submit" disabled={loading} className={`transition duration-200 hover:bg-secondary-200 p-1 rounded-full mx-2 px-4 py-2 bg-secondary-100 text-white capitalize  lg:text-lg font-semibold w-full font-sans `}>{loading?<SmallLoader/>:t("common:login")}</button>
                </form>
                <div className=" my-4 text-center text-sm"><span>{t("common:don't_have_account")}</span><Link href='/register'><a><span className="text-secondary cursor-pointer mx-1 underline font-semibold">{t("common:register")}</span></a></Link></div>
